@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Barcode Photo Display</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    color: #333;
+  }
+  header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  header h1 {
+    font-weight: 600;
+    font-size: 2rem;
+    color: #222;
+    margin: 0;
+  }
+  .barcode-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .barcode-image {
+    width: 250px;
+    height: 250px;
+    border: 2px dashed #bbb;
+    border-radius: 12px;
+    background: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    object-fit: contain;
+  }
+  .barcode-image img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .caption {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .upload-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 0.6rem 1.6rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+  }
+  .upload-button:hover {
+    background: #0056b3;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  @media (max-width: 480px) {
+    .barcode-card {
+      max-width: 90vw;
+      padding: 1.5rem;
+    }
+    .barcode-image {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Foto Barcode Jualan</h1>
+</header>
+<main>
+  <section class="barcode-card">
+    <label for="upload" class="barcode-image" aria-label="Upload barcode photo">
+      <img id="barcodePhoto" src="images/barcode.jpg" alt="Contoh Barcode Jualan" width="120%">
+    </label>
+    <div class="caption">Jangan buang waktu, scan aja! WhatsApp order siap melayani Anda Dalam Pemesanan Buah Di Toko Harum</div>
+    <div class="button">
+        <button style="background-color: rgb(238, 234, 15); width: 250%;">
+         <a href="index.html">Back</a> 
+        </button>
+      </div>
+  </section>
+</main>
+<script>
+  const uploadInput = document.getElementById('upload');
+  const barcodePhoto = document.getElementById('barcodePhoto');
+
+  uploadInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        barcodePhoto.src = evt.target.result;
+        barcodePhoto.alt = 'Foto Barcode Jualan';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert('Harap pilih file gambar yang valid.');
+    }
+  });
+</script>
+</body>
+</html>
